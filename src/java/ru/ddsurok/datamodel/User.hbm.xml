@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="ru.ddsurok.datamodel.User" table="m_user">
+        <id name="Id" column="id" type="integer" access="field">
+            <generator class="native"/>
+        </id>
+        <property name="NickName" type="string" column="nick" not-null="true" unique="true" access="field" />
+        <property name="HashPswd" type="string" column="hashpswd" not-null="true" unique="false" access="field" />
+        <property name="email" type="string" column="email" not-null="true" unique="true" access="field" />
+        <property name="Family" type="string" column="family" not-null="false" unique="false" access="field" />
+        <property name="Name" type="string" column="name" not-null="false" unique="false" access="field" />
+    </class>
+</hibernate-mapping>

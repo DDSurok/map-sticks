@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://10.10.0.35:12432/maps</property>
+    <property name="hibernate.connection.username">maps</property>
+    <property name="hibernate.connection.password">maps</property>
+    <property name="hibernate.default_schema">yamaps</property>
+    <mapping resource="ru/ddsurok/datamodel/User.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
