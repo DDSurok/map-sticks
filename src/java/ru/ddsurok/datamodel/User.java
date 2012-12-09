@@ -4,28 +4,41 @@ package ru.ddsurok.datamodel;
  *
  * @author d.duritskij
  */
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.Id;
+import java.io.Serializable;
+//import javax.persistence.*;
 
-@Entity
-public class User {
+//@Entity(name="User")
+//@Table(name = "m_user")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class User implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    private static final long serialVersionUID = 1L;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "id")
     private int Id;
-    @Column
+//    @Column(name = "nick", nullable = false, unique = true)
     private String NickName;
-    @Column
+//    @Column(name = "hashpswd", nullable = false)
     private String HashPswd;
-    @Column
+//    @Column(name = "family")
     private String Family;
-    @Column
+//    @Column(name = "name")
     private String Name;
-    @Column
-    private String email;
+//    @Column(name = "email", nullable = false, unique = true)
+    private String Email;
+    
+    public User () {
+    }
+    
+    public User (int id, String nickName, String hashPswd, String family, String name, String email) {
+        Id = id;
+        NickName = nickName;
+        HashPswd = hashPswd;
+        Family = family;
+        Name = name;
+        Email = email;
+    }
 
     public void setId(int value) {
         Id = value;
@@ -68,10 +81,10 @@ public class User {
     }
 
     public void setEmail(String value) {
-        email = value;
+        Email = value;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 }
