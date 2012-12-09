@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="org.hibernate.SessionFactory"%>
-<%@page import="java.util.List"%>
-<%@page import="ru.ddsurok.datamodel.UserUtils"%>
+<%@page import="java.util.Collection"%>
+<%@page import="ru.ddsurok.utils.UserUtil"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +18,8 @@
     <body>
         <h1>Users</h1>
         <%
-            List list = UserUtils.getActorsByID();
+            UserUtil userUtil = new UserUtil();
+            Collection list = userUtil.getAllUsers();
             if (list != null) {
                 request.setAttribute("userList", list);
                 request.setAttribute("userCount", String.valueOf(list.size()));
