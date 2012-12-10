@@ -10,6 +10,7 @@ package ru.ddsurok.utils;
  */
 import ru.ddsurok.utils.IUserUtil;
 import ru.ddsurok.datamodel.User;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.ArrayList;
@@ -21,21 +22,35 @@ import org.hibernate.Session;
 import org.hibernate.Query;
 import org.hibernate.transform.ResultTransformer;
 
-public class UserUtil implements IUserUtil {
+public class UserUtil implements IUserUtil, Serializable {
 
-    @Override
-    public void addUser(User user) throws SQLException {
-        Session session = null;
+    private Session session = null;
+
+    public UserUtil() {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void finalize() throws Throwable {
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
+    }
+
+    @Override
+    public void addUser(User user) throws SQLException {
+        try {
             session.save(user);
             session.getTransaction().commit();
+            session.beginTransaction();
         } catch (Exception e) {
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+            session.getTransaction().rollback();
+            session.beginTransaction();
         }
     }
 
@@ -43,65 +58,52 @@ public class UserUtil implements IUserUtil {
     public void updateUser(int id, User user) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
             session.update(user);
             session.getTransaction().commit();
+            session.beginTransaction();
         } catch (Exception e) {
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+            session.getTransaction().rollback();
+            session.beginTransaction();
         }
     }
 
     @Override
     public User getUserById(int id) throws SQLException {
-        Session session = null;
         User user = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
             user = (User) session.load(User.class, id);
+            session.getTransaction().commit();
+            session.beginTransaction();
         } catch (Exception e) {
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+            session.getTransaction().rollback();
+            session.beginTransaction();
         }
         return user;
     }
 
     @Override
     public Collection getAllUsers() throws SQLException {
-        Session session = null;
-        List<User> users = new ArrayList<User>();
+        List users = new ArrayList<User>();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            User user = (User)session.load(User.class, new Integer(1));
-            users.add(user);
+            users = session.createCriteria(User.class).list();
+            session.getTransaction().commit();
+            session.beginTransaction();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+            session.getTransaction().rollback();
+            session.beginTransaction();
         }
         return users;
     }
 
     @Override
     public void deleteUser(User user) throws SQLException {
-        Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
             session.delete(user);
             session.getTransaction().commit();
+            session.beginTransaction();
         } catch (Exception e) {
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+            session.getTransaction().rollback();
+            session.beginTransaction();
         }
     }
 }

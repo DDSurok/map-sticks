@@ -1,0 +1,38 @@
+/* 
+    Document   : Users
+    Created on : 10.12.2012, 11:20:56
+    Author     : d.duritskij
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body.adminPage {background-image:url(img/fon_con.gif);
+    margin: 0px auto;
+    min-width:950px;
+    max-width:950px;
+    text-align:left;
+}
+
+table.usersView {
+    border: 0px;
+    margin: 5px;
+}
+
+div.usersViewTextCell {
+    margin: 2px;
+}
+
+div.adminPageItem {
+    width: 950px;
+    padding: 25px;
+    font-family: sans-serif;
+}
+
+div.adminHeaderDiv {
+    background-color: cornflowerblue;
+    height: 50px;
+    font-size: xx-large;
+    text-align: center;
+    font-style: inherit;
+    color: black;
+}
