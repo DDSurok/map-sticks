@@ -4,28 +4,17 @@ package ru.ddsurok.datamodel;
  *
  * @author d.duritskij
  */
-import java.io.Serializable;
-//import javax.persistence.*;
 
-//@Entity(name="User")
-//@Table(name = "m_user")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+import java.io.Serializable;
+
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id")
     private int Id;
-//    @Column(name = "nick", nullable = false, unique = true)
     private String NickName;
-//    @Column(name = "hashpswd", nullable = false)
     private String HashPswd;
-//    @Column(name = "family")
     private String Family;
-//    @Column(name = "name")
     private String Name;
-//    @Column(name = "email", nullable = false, unique = true)
     private String Email;
     
     public User () {

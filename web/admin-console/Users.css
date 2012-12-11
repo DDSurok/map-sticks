@@ -54,9 +54,22 @@ div.adminHeaderDiv {
     color: black;
 }
 
+span.required {
+    color: red;
+    font-style: oblique;
+}
+
+input.maxSize {
+    width: 100%;
+}
+
+td.alignCenter {
+    text-align: center;
+}
+
 /* Классы для формирования таблицы с пользователями */
-table.usersView {
-    border: 0px;
+table.noBorderMargin5 {
+    border: 2px;
     margin: 5px;
 }
 

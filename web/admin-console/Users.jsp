@@ -44,7 +44,7 @@
         %>
         <div id="mainDiv" class="adminPageItem">
             <c:if test='${userCount!="0"}'>
-            <table border="0" class="usersView">
+            <table class="noBorderMargin5">
                 <c:forEach items="${userList}" var="row">
                 <tr>
                     <td><div class="">${row.getId()}</div></td>
@@ -60,7 +60,7 @@
         </div>
         <div id="frameDiv" style="display: none;" class="adminPageFrame"></div>
     </body>
-    <script lang="text/javascript">
+    <script lang="javascript">
         Object.prototype.disabledElement = function() {
             var all = this.childNodes;
             var inp, i=0;
@@ -93,7 +93,7 @@
             var elem = document.getElementById("mainDiv");
             elem.disabledElement();
             var frameElem = document.getElementById("frameDiv");
-            frameElem.innerHTML = '<iframe src="UserEdit.jsp?mode=add" class="adminPageFrame" />';
+            frameElem.innerHTML = '<iframe src="UserModifity/?mode=add" class="adminPageFrame" />';
             frameElem.removeAttribute("style");
         };
         var highlighterElementById = function(elemId) {

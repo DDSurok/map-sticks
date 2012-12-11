@@ -17,18 +17,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UserForms extends HttpServlet {
 
-    private void createFormAdd(StringBuilder response)
-            throws ServletException, IOException {
-        response.append("<html>");
-        response.append("<head>");
-        response.append("<title>Add user page</title>");
-        response.append("</head>");
-        response.append("<body class=\"adminPage\">");
-        response.append("Форма добавления пользователя");
-        response.append("</body>");
-        response.append("</html>");
-    }
-    
     private void createFormEdit(int Id, StringBuilder response)
             throws ServletException, IOException {
         response.append("<html>");
@@ -85,7 +73,8 @@ public class UserForms extends HttpServlet {
             mode = "failure";
         }
         if (mode.equals("add")) {
-            createFormAdd(res);
+            request.getRequestDispatcher("/admin-console/formAddUser.html").forward(request, response);
+            return;
         } else if (mode.equals("edit")) {
             int id = Integer.valueOf(request.getParameter("user"));
             createFormEdit(id, res);

@@ -1,0 +1,104 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" href="Users.css" rel="stylesheet">
+    </head>
+    <body class="adminPage">
+        <div class="adminPageItem adminHeaderDiv" style="font-size:large;">Новый пользователь</div>
+        <div class="adminPageItem">
+            <form method="POST" action="UserModifity/">
+                <table class="noBorderMargin5">
+                    <colgroup>
+                        <col width="5%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="5%" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <span>Никнейм:&nbsp;</span><span class="required">*</span>
+                            </td>
+                            <td colspan="6">
+                                <input type="text" name="nick" value="" maxlength="50" class="maxSize" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <span>Пароль:&nbsp;</span><span class="required">*</span>
+                            </td>
+                            <td colspan="6">
+                                <input type="text" id="password" value="" maxlength="100" class="maxSize" />
+                                <input type="hidden" name="hashpswd" value="" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <span>Фамилия:&nbsp;</span>
+                            </td>
+                            <td colspan="6">
+                                <input type="text" name="family" value="" maxlength="100" class="maxSize" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <span>Имя:&nbsp;</span>
+                            </td>
+                            <td colspan="6">
+                                <input type="text" name="name" value="" maxlength="100" class="maxSize" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <span>E-mail:&nbsp;</span>
+                            </td>
+                            <td colspan="6">
+                                <input type="text" name="email" value="" maxlength="100" class="maxSize" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <span>Блокировка:&nbsp;</span>
+                            </td>
+                            <td class="alignCenter">
+                                <input type="checkbox" name="isLocked" value="" />
+                            </td>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <span>В бан-листе:&nbsp;</span>
+                            </td>
+                            <td class="alignCenter">
+                                <input type="checkbox" name="isBaned" value="" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>
