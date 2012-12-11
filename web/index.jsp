@@ -39,5 +39,7 @@
     <body>
         <div id="map" style="width:400px; height:300px"></div>
         <input type="button" id="destroyButton" value="Удалить карту"/>
+        <br />
+        <a href="admin-console/Users.jsp">Админка</a>
     </body>
 </html>

@@ -40,6 +40,7 @@ public class UserUtil implements IUserUtil, Serializable {
         if (session != null && session.isOpen()) {
             session.close();
         }
+        super.finalize();
     }
 
     @Override

@@ -6,13 +6,55 @@
         Purpose of the stylesheet follows.
 */
 
-body.adminPage {background-image:url(img/fon_con.gif);
+.highlighter {
+    outline: solid rgba(0, 0, 0, .25) 10000px;
+}
+
+body.adminPage {
+    padding: 0px;
+    margin: 0px;
+    background-color: gainsboro;
     margin: 0px auto;
-    min-width:950px;
-    max-width:950px;
     text-align:left;
 }
 
+div.adminPageItem {
+    width: auto;
+    padding: 15px;
+    font-family: sans-serif;
+    z-index: 10;
+}
+
+div.adminPageFrame {
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    top:50px;
+    left: 50px;
+    height: 500px;
+    width: 600px;
+    z-index: 1;
+}
+
+iframe.adminPageFrame {
+    padding: 0px;
+    margin: 0px;
+    height: 500px;
+    width: 600px;
+    z-index: 1;
+    border: 0px;
+}
+
+div.adminHeaderDiv {
+    background-color: cornflowerblue;
+    min-height: 35px;
+    font-size: xx-large;
+    text-align: left;
+    vertical-align: bottom;
+    color: black;
+}
+
+/* Классы для формирования таблицы с пользователями */
 table.usersView {
     border: 0px;
     margin: 5px;
@@ -20,19 +62,4 @@ table.usersView {
 
 div.usersViewTextCell {
     margin: 2px;
-}
-
-div.adminPageItem {
-    width: 950px;
-    padding: 25px;
-    font-family: sans-serif;
-}
-
-div.adminHeaderDiv {
-    background-color: cornflowerblue;
-    height: 50px;
-    font-size: xx-large;
-    text-align: center;
-    font-style: inherit;
-    color: black;
 }
