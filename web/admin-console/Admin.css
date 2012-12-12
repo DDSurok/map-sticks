@@ -6,50 +6,48 @@
         Purpose of the stylesheet follows.
 */
 
-.highlighter {
-    outline: solid rgba(0, 0, 0, .25) 10000px;
-}
-
-body.adminPage {
+body {
     padding: 0px;
-    margin: 0px;
     background-color: gainsboro;
     margin: 0px auto;
     text-align:left;
+    font-family: sans-serif;
 }
 
-div.adminPageItem {
+body.width950 {
+    min-width:950px;
+    max-width:950px;
+}
+
+div.pageItem {
     width: auto;
     padding: 15px;
-    font-family: sans-serif;
+}
+
+div.zindex10 {
     z-index: 10;
 }
 
-div.adminPageFrame {
+div.balloon {
     padding: 0px;
     margin: 0px;
     position: absolute;
     top:50px;
     left: 50px;
-    height: 500px;
+    height: 280px;
     width: 600px;
     z-index: 1;
 }
 
-iframe.adminPageFrame {
-    padding: 0px;
-    margin: 0px;
-    height: 500px;
+iframe.balloon {
+    height: 280px;
     width: 600px;
-    z-index: 1;
-    border: 0px;
 }
 
-div.adminHeaderDiv {
+div.header {
     background-color: cornflowerblue;
     min-height: 35px;
     font-size: xx-large;
-    text-align: left;
     vertical-align: bottom;
     color: black;
 }
@@ -59,20 +57,43 @@ span.required {
     font-style: oblique;
 }
 
-input.maxSize {
+.highlighter {
+    outline: solid rgba(0, 0, 0, .25) 10000px;
+}
+
+.noBorder {
+    border: 0px;
+}
+
+.maxWidth {
     width: 100%;
 }
 
-td.alignCenter {
+.width5percent {
+    width: 5%;
+}
+
+.width10percent {
+    width: 10%;
+}
+
+.alignCenter {
     text-align: center;
 }
 
-/* Классы для формирования таблицы с пользователями */
-table.noBorderMargin5 {
-    border: 2px;
+.alignLeft {
+    text-align: left;
+}
+
+.margin5 {
     margin: 5px;
 }
 
-div.usersViewTextCell {
+.margin2 {
     margin: 2px;
+}
+
+.noMarginNoPadding {
+    margin: 0px;
+    padding: 0px;
 }

@@ -13,12 +13,33 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="Users.css">
-        <!--script src="/common/common.js" lang="text/javascript"></script-->
+        <link rel="stylesheet" type="text/css" href="Admin.css">
+        <script src="../common/common.js" type="text/javascript"></script>
         <title>Users</title>
+        <script type="text/javascript">
+            var ballooneFrameView = function() {
+                window.document.getElementById("frameDiv").removeAttribute("style");
+            }
+            var createDivAdd = function() {
+                highlighterElementById("headerDiv");
+                highlighterElementById("mainDiv");
+                var dds = new DDSurok;
+                dds.init();
+                document.getElementById("mainDiv").disabledElement();
+                document.getElementById("controlDiv").disabledElement();
+                window.parent.ballooneFrame.location.href = "UserModifity/?mode=add";
+                //window.parent.ballooneFrame.location.reload(true);
+                //ballooneFrame.contectWindow.onload = ballooneFrameView;
+                ballooneFrameView();
+            };
+            var highlighterElementById = function(elemId) {
+                var elem = document.getElementById(elemId);
+                elem.className = elem.className + " highlighter";
+            };
+        </script>
     </head>
-    <body class="adminPage" style="min-width:950px;max-width:950px;">
-        <div id="headerDiv" class="adminPageItem adminHeaderDiv">Пользователи</div>
+    <body class="width950">
+        <div id="headerDiv" class="pageItem header zindex10">Пользователи</div>
         <%
             Object temp = session.getAttribute("utils");
             UserUtil userUtil = null;
@@ -26,79 +47,39 @@
                 if (temp != null) {
                     userUtil = (UserUtil) temp;
                 }
-            } catch (Throwable th) {
             } finally {
                 if (userUtil == null) {
                     userUtil = new UserUtil();
-                }
-                Collection list = userUtil.getAllUsers();
-                if (list != null) {
-                    request.setAttribute("userList", list);
-                    request.setAttribute("userCount", String.valueOf(list.size()));
                     session.setAttribute("utils", userUtil);
-                } else {
-                    request.setAttribute("userCount", "0");
-                    request.setAttribute("utils", userUtil);
                 }
             }
         %>
-        <div id="mainDiv" class="adminPageItem">
-            <c:if test='${userCount!="0"}'>
-            <table class="noBorderMargin5">
-                <c:forEach items="${userList}" var="row">
-                <tr>
-                    <td><div class="">${row.getId()}</div></td>
-                    <td>${row.getNickName()}</td>
-                    <td>${row.getEmail()}</td>
-                </tr>
-                </c:forEach>
+        <div>
+            <table class="noBorder noMarginNoPadding maxWidth">
+                <colgroup>
+                    <col width="100%" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div id="mainDiv" class="maxWidth noMarginNoPadding zindex10">
+                                <iframe id="mainFrame" src="UserList.jsp" class="noBorder noMarginNoPadding maxWidth"></iframe>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="controlDiv" class="pageItem maxWidth zindex10">
+                                <button onclick='window.getElementById("MainFrame").location.reload()'>Обновить</button>
+                                &Tab;
+                                <button onclick="createDivAdd()">Добавить</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-            </c:if>
-            <c:if test='${userCount=="0"}'><span>Список пользователей пуст!</span></c:if>
-            <button onclick="window.location.reload()">Обновить список</button><span>&Tab;</span>
-            <button onclick="createDivAdd()">Добавить</button>
+        <div id="frameDiv" class="balloon" style="display:none;">
+            <iframe id="ballooneFrame" class="balloon" name="ballooneFrame" src="UserModifity/?mode=null"></iframe>
         </div>
-        <div id="frameDiv" style="display: none;" class="adminPageFrame"></div>
     </body>
-    <script lang="javascript">
-        Object.prototype.disabledElement = function() {
-            var all = this.childNodes;
-            var inp, i=0;
-            while(inp=all[i++]) {
-                if ((inp != null)&&(inp.textContent.trim() != "")) {
-                    if ((inp.tagName == "INPUT")
-                        ||(inp.tagName == "BUTTON")
-                        ||(inp.tagName == "SELECT")
-                        ||(inp.tagName == "RADIO")) {
-                        inp.disabled=true;
-                    } else {
-                        inp.disabledElement();
-                    }
-                }
-            }
-        };
-        String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ''); };
-        Document.prototype.childFrameClose = function(isSuccess) {
-            if (isSuccess) {
-                window.location.reload()
-            } else {
-                var elem = this.getElementById("frameDiv");
-                elem.innerHTML = "";
-                elem.setAttribute("style", "display: none;");
-            }
-        };
-        var createDivAdd = function() {
-            highlighterElementById("headerDiv");
-            highlighterElementById("mainDiv");
-            var elem = document.getElementById("mainDiv");
-            elem.disabledElement();
-            var frameElem = document.getElementById("frameDiv");
-            frameElem.innerHTML = '<iframe src="UserModifity/?mode=add" class="adminPageFrame" />';
-            frameElem.removeAttribute("style");
-        };
-        var highlighterElementById = function(elemId) {
-            var elem = document.getElementById(elemId);
-            elem.className = elem.className + " highlighter";
-        };
-    </script>
 </html>

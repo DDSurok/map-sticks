@@ -1,40 +1,53 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
+<%--
+    Document   : formAddUser
+    Created on : 07.12.2012, 12:33:47
+    Author     : d.duritskij
+--%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" href="Users.css" rel="stylesheet">
+        <link type="text/css" href="../Admin.css" rel="stylesheet">
+        <script src="../../common/jsSHA-256.js"></script>
+        <script type="text/javascript">
+            var sendUserInfo = function () {
+                var sha256 = new Sha256();
+                document.getElementById("hashpswd").value = sha256.hash(document.getElementById("password").value, true);
+                document.getElementById("adduserForm").submit();
+            }
+        </script>
     </head>
-    <body class="adminPage">
-        <div class="adminPageItem adminHeaderDiv" style="font-size:large;">Новый пользователь</div>
-        <div class="adminPageItem">
-            <form method="POST" action="UserModifity/">
-                <table class="noBorderMargin5">
+    <body>
+        <div class="pageItem header" style="font-size:large;">Новый пользователь</div>
+        <div class="pageItem">
+            <form id="addUserForm" method="POST" action="UserModifity/">
+                <input type="hidden" name="mode" value="add_" />
+                <table class="noBorderMargin5 maxWidth">
                     <colgroup>
-                        <col width="5%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="10%" />
-                        <col width="5%" />
+                        <col class="width5percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width10percent" />
+                        <col class="width5percent" />
                     </colgroup>
                     <tbody>
                         <tr>
                             <td>&nbsp;</td>
                             <td colspan="3">
-                                <span>Никнейм:&nbsp;</span><span class="required">*</span>
+                                <span>Ник:&nbsp;</span><span class="required">*</span>
                             </td>
                             <td colspan="6">
-                                <input type="text" name="nick" value="" maxlength="50" class="maxSize" />
+                                <input type="text" name="nick" value="" maxlength="50" class="maxWidth" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -44,8 +57,8 @@ and open the template in the editor.
                                 <span>Пароль:&nbsp;</span><span class="required">*</span>
                             </td>
                             <td colspan="6">
-                                <input type="text" id="password" value="" maxlength="100" class="maxSize" />
-                                <input type="hidden" name="hashpswd" value="" />
+                                <input type="text" id="password" value="" maxlength="100" class="maxWidth" />
+                                <input type="hidden" id="hashpswd" name="hashpswd" value="" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -55,7 +68,7 @@ and open the template in the editor.
                                 <span>Фамилия:&nbsp;</span>
                             </td>
                             <td colspan="6">
-                                <input type="text" name="family" value="" maxlength="100" class="maxSize" />
+                                <input type="text" name="family" value="" maxlength="100" class="maxWidth" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -65,7 +78,7 @@ and open the template in the editor.
                                 <span>Имя:&nbsp;</span>
                             </td>
                             <td colspan="6">
-                                <input type="text" name="name" value="" maxlength="100" class="maxSize" />
+                                <input type="text" name="name" value="" maxlength="100" class="maxWidth" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -75,7 +88,7 @@ and open the template in the editor.
                                 <span>E-mail:&nbsp;</span>
                             </td>
                             <td colspan="6">
-                                <input type="text" name="email" value="" maxlength="100" class="maxSize" />
+                                <input type="text" name="email" value="" maxlength="100" class="maxWidth" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -95,6 +108,13 @@ and open the template in the editor.
                                 <input type="checkbox" name="isBaned" value="" />
                             </td>
                             <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                <div style="text-align: center;">
+                                    <input type="button" value="Добавить" onClick="sendUserInfo()" />
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
