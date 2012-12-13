@@ -17,24 +17,27 @@
         <script src="../common/common.js" type="text/javascript"></script>
         <title>Users</title>
         <script type="text/javascript">
-            var ballooneFrameView = function() {
-                window.document.getElementById("frameDiv").removeAttribute("style");
-            }
-            var createDivAdd = function() {
-                highlighterElementById("headerDiv");
-                highlighterElementById("mainDiv");
+            var closeBallonneFrame = function() {
                 var dds = new DDSurok;
                 dds.init();
+                var par = window.top.document;
+                par.getElementById("headerDiv").removeClass("highlighter");
+                par.getElementById("mainDiv").removeClass("highlighter");
+                par.getElementById("mainDiv").enabledElement();
+                par.getElementById("controlDiv").enabledElement();
+                window.parent.ballooneFrame.location.href = "#";
+                par.getElementById("frameDiv").setAttribute("style", "display:none;");
+                window.parent.mainFrame.location.reload();
+            }
+            var showBallooneFrame = function() {
+                var dds = new DDSurok;
+                dds.init();
+                document.getElementById("headerDiv").addClass("highlighter");
+                document.getElementById("mainDiv").addClass("highlighter");
                 document.getElementById("mainDiv").disabledElement();
                 document.getElementById("controlDiv").disabledElement();
-                window.parent.ballooneFrame.location.href = "UserModifity/?mode=add";
-                //window.parent.ballooneFrame.location.reload(true);
-                //ballooneFrame.contectWindow.onload = ballooneFrameView;
-                ballooneFrameView();
-            };
-            var highlighterElementById = function(elemId) {
-                var elem = document.getElementById(elemId);
-                elem.className = elem.className + " highlighter";
+                window.parent.ballooneFrame.location.href = "worker?mode=add";
+                window.document.getElementById("frameDiv").removeAttribute("style");
             };
         </script>
     </head>
@@ -63,7 +66,7 @@
                     <tr>
                         <td>
                             <div id="mainDiv" class="maxWidth noMarginNoPadding zindex10">
-                                <iframe id="mainFrame" src="UserList.jsp" class="noBorder noMarginNoPadding maxWidth"></iframe>
+                                <iframe id="mainFrame" name="mainFrame" src="UserList.jsp" class="noBorder noMarginNoPadding maxWidth"></iframe>
                             </div>
                         </td>
                     </tr>
@@ -72,14 +75,14 @@
                             <div id="controlDiv" class="pageItem maxWidth zindex10">
                                 <button onclick='window.getElementById("MainFrame").location.reload()'>Обновить</button>
                                 &Tab;
-                                <button onclick="createDivAdd()">Добавить</button>
+                                <button onclick="showBallooneFrame()">Добавить</button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         <div id="frameDiv" class="balloon" style="display:none;">
-            <iframe id="ballooneFrame" class="balloon" name="ballooneFrame" src="UserModifity/?mode=null"></iframe>
+            <iframe id="ballooneFrame" class="balloon noBorder" name="ballooneFrame" src="#"></iframe>
         </div>
     </body>
 </html>

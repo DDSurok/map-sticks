@@ -73,7 +73,7 @@ public class UserForms extends HttpServlet {
             mode = "failure";
         }
         if (mode.equals("add")) {
-            request.getRequestDispatcher("/admin-console/formAddUser.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin-console/UserModifity.jsp").forward(request, response);
             return;
         } else if (mode.equals("edit")) {
             int id = Integer.valueOf(request.getParameter("user"));
