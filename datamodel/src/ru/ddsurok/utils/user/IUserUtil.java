@@ -20,6 +20,8 @@ public interface IUserUtil {
 
     public User getUserById(int id) throws SQLException;
 
+    public User getUserByNick(String nick) throws SQLException;
+
     public Collection getAllUsers() throws SQLException;
 
     public void deleteUser(User user) throws SQLException;

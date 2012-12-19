@@ -22,7 +22,7 @@
             request.setAttribute("userList", list);
             request.setAttribute("userCount", String.valueOf(list.size()));
         %>
-        <c:if test='${userCount!="0"}'>
+        <c:if test='${userCount>0}'>
         <table class="noBorderMargin5">
             <c:forEach items="${userList}" var="row">
             <tr>
@@ -33,6 +33,6 @@
             </c:forEach>
         </table>
         </c:if>
-        <c:if test='${userCount=="0"}'><span>Список пользователей пуст!</span></c:if>
+        <c:if test='${userCount==0}'><span>Список пользователей пуст!</span></c:if>
     </body>
 </html>
