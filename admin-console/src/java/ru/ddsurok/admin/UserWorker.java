@@ -61,13 +61,13 @@ public class UserWorker extends HttpServlet {
             }
         } else if (mode.equals("add_")) {
             User user = new User();
-            user.setNickName(request.getParameter("nick"));
-            user.setHashPswd(request.getParameter("hashpswd"));
+            user.setNick(request.getParameter("nick"));
+            user.setHashpswd(request.getParameter("hashpswd"));
             user.setFamily(request.getParameter("family"));
             user.setName(request.getParameter("name"));
             user.setEmail(request.getParameter("email"));
-            user.setIsLocked(Boolean.valueOf(request.getParameter("isLocked")));
-            user.setIsBaned(Boolean.valueOf(request.getParameter("isBaned")));
+            user.setIslocked(Boolean.valueOf(request.getParameter("isLocked")));
+            user.setIsbaned(Boolean.valueOf(request.getParameter("isBaned")));
             UserUtil utils = UserUtil.getUserUtil(request.getSession());
             try {
                 utils.addUser(user);
@@ -84,13 +84,13 @@ public class UserWorker extends HttpServlet {
         } else if (mode.equals("edit_")) {
             User user = new User();
             user.setId(Integer.valueOf(request.getParameter("id")));
-            user.setNickName(request.getParameter("nick"));
-            user.setHashPswd(request.getParameter("hashpswd"));
+            user.setNick(request.getParameter("nick"));
+            user.setHashpswd(request.getParameter("hashpswd"));
             user.setFamily(request.getParameter("family"));
             user.setName(request.getParameter("name"));
             user.setEmail(request.getParameter("email"));
-            user.setIsLocked(Boolean.valueOf(request.getParameter("isLocked")));
-            user.setIsBaned(Boolean.valueOf(request.getParameter("isBaned")));
+            user.setIslocked(Boolean.valueOf(request.getParameter("isLocked")));
+            user.setIsbaned(Boolean.valueOf(request.getParameter("isBaned")));
             UserUtil utils = UserUtil.getUserUtil(request.getSession());
             try {
                 utils.updateUser(user.getId(), user);

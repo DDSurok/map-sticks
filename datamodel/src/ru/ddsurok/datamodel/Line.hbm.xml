@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19.12.2012 13:07:08 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="ru.ddsurok.datamodel.Line" schema="public" table="m_line">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ru.ddsurok.datamodel.Polygon" fetch="select" name="MPolygon">
+      <column name="polygon"/>
+    </many-to-one>
+    <property name="x1" type="float">
+      <column name="x1" not-null="true" precision="8" scale="8"/>
+    </property>
+    <property name="y1" type="float">
+      <column name="y1" not-null="true" precision="8" scale="8"/>
+    </property>
+    <property name="x2" type="float">
+      <column name="x2" not-null="true" precision="8" scale="8"/>
+    </property>
+    <property name="y2" type="float">
+      <column name="y2" not-null="true" precision="8" scale="8"/>
+    </property>
+  </class>
+</hibernate-mapping>

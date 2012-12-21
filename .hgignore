@@ -1,6 +1,7 @@
 syntax: glob
 dist/
 build/
-nbproject/private/private.xml
-nbproject/private/private.properties
+nbproject/private/
 datamodel/nbproject/private/
+datamodel/dist/
+datamodel/build/

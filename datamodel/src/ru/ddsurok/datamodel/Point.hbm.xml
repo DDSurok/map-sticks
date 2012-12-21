@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19.12.2012 13:07:08 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="ru.ddsurok.datamodel.Point" schema="public" table="m_point">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ru.ddsurok.datamodel.User" fetch="select" name="MUser">
+      <column name="author" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="ru.ddsurok.datamodel.Album" fetch="select" name="MAlbum">
+      <column name="album"/>
+    </many-to-one>
+    <property name="x" type="float">
+      <column name="x" not-null="true" precision="8" scale="8"/>
+    </property>
+    <property name="y" type="float">
+      <column name="y" not-null="true" precision="8" scale="8"/>
+    </property>
+    <property name="caption" type="string">
+      <column name="caption"/>
+    </property>
+    <property name="color" type="string">
+      <column length="6" name="color"/>
+    </property>
+  </class>
+</hibernate-mapping>

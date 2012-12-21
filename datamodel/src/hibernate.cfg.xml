@@ -10,6 +10,10 @@
     <property name="hibernate.connection.password">maps</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
+    <mapping resource="ru/ddsurok/datamodel/Point.hbm.xml"/>
+    <mapping resource="ru/ddsurok/datamodel/Polygon.hbm.xml"/>
+    <mapping resource="ru/ddsurok/datamodel/Album.hbm.xml"/>
+    <mapping resource="ru/ddsurok/datamodel/Line.hbm.xml"/>
     <mapping resource="ru/ddsurok/datamodel/User.hbm.xml"/>
     <mapping resource="ru/ddsurok/datamodel/Session.hbm.xml"/>
   </session-factory>
