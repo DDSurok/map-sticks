@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ru.ddsurok.maps.ws.authentication;
+package ru.ddsurok.maps.ws;
 
 import java.beans.*;
 
@@ -15,7 +15,7 @@ public class AuthenticationBeanInfo extends SimpleBeanInfo {
     // Bean descriptor//GEN-FIRST:BeanDescriptor
     /*lazy BeanDescriptor*/
     private static BeanDescriptor getBdescriptor(){
-        BeanDescriptor beanDescriptor = new BeanDescriptor  ( ru.ddsurok.maps.ws.authentication.Authentication.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
+        BeanDescriptor beanDescriptor = new BeanDescriptor  ( ru.ddsurok.maps.ws.Authentication.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
 
         // Here you can add code for customizing the BeanDescriptor.
 
@@ -49,7 +49,7 @@ public class AuthenticationBeanInfo extends SimpleBeanInfo {
         MethodDescriptor[] methods = new MethodDescriptor[1];
     
         try {
-            methods[METHOD_getAuthToken0] = new MethodDescriptor(ru.ddsurok.maps.ws.authentication.Authentication.class.getMethod("getAuthToken", new Class[] {java.lang.String.class, java.lang.String.class})); // NOI18N
+            methods[METHOD_getAuthToken0] = new MethodDescriptor(ru.ddsurok.maps.ws.Authentication.class.getMethod("getAuthToken", new Class[] {java.lang.String.class, java.lang.String.class})); // NOI18N
             methods[METHOD_getAuthToken0].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods

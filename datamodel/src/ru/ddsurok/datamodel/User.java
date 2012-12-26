@@ -26,7 +26,21 @@ public class User  implements java.io.Serializable {
 
     public User() {
     }
-
+    
+    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("USER [ %d ]\n", this.getId()));
+        builder.append("{\n");
+        builder.append(String.format("\tNICK: %s;\n", this.getNick()));
+        builder.append(String.format("\tNAME: %s %s;\n", this.getFamily(), this.getName()));
+        builder.append(String.format("\tE-MAIL: %s;\n", this.getEmail()));
+        builder.append(String.format("\tIS LOCKED: %s;\n", Boolean.toString(islocked)));
+        builder.append(String.format("\tIS BANED: %s;\n", Boolean.toString(isbaned)));
+        builder.append("}\n");
+        return builder.toString();
+    }
 	
     public User(int id, String nick, String hashpswd, String email, boolean islocked, boolean isbaned) {
         this.id = id;
@@ -36,6 +50,7 @@ public class User  implements java.io.Serializable {
         this.islocked = islocked;
         this.isbaned = isbaned;
     }
+    
     public User(int id, String nick, String hashpswd, String family, String name, String email, boolean islocked, boolean isbaned, Set MAlbums, Set MPolygons, Set MPoints, Set MSessions) {
        this.id = id;
        this.nick = nick;
@@ -58,6 +73,7 @@ public class User  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
+    
     public String getNick() {
         return this.nick;
     }
@@ -65,6 +81,7 @@ public class User  implements java.io.Serializable {
     public void setNick(String nick) {
         this.nick = nick;
     }
+    
     public String getHashpswd() {
         return this.hashpswd;
     }
@@ -72,6 +89,7 @@ public class User  implements java.io.Serializable {
     public void setHashpswd(String hashpswd) {
         this.hashpswd = hashpswd;
     }
+    
     public String getFamily() {
         return this.family;
     }
@@ -79,6 +97,7 @@ public class User  implements java.io.Serializable {
     public void setFamily(String family) {
         this.family = family;
     }
+    
     public String getName() {
         return this.name;
     }
@@ -86,6 +105,7 @@ public class User  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
     public String getEmail() {
         return this.email;
     }
@@ -93,6 +113,7 @@ public class User  implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    
     public boolean isIslocked() {
         return this.islocked;
     }
@@ -100,6 +121,7 @@ public class User  implements java.io.Serializable {
     public void setIslocked(boolean islocked) {
         this.islocked = islocked;
     }
+    
     public boolean isIsbaned() {
         return this.isbaned;
     }
@@ -107,6 +129,7 @@ public class User  implements java.io.Serializable {
     public void setIsbaned(boolean isbaned) {
         this.isbaned = isbaned;
     }
+    
     public Set getMAlbums() {
         return this.MAlbums;
     }
@@ -114,6 +137,7 @@ public class User  implements java.io.Serializable {
     public void setMAlbums(Set MAlbums) {
         this.MAlbums = MAlbums;
     }
+    
     public Set getMPolygons() {
         return this.MPolygons;
     }
@@ -121,6 +145,7 @@ public class User  implements java.io.Serializable {
     public void setMPolygons(Set MPolygons) {
         this.MPolygons = MPolygons;
     }
+    
     public Set getMPoints() {
         return this.MPoints;
     }
@@ -128,6 +153,7 @@ public class User  implements java.io.Serializable {
     public void setMPoints(Set MPoints) {
         this.MPoints = MPoints;
     }
+    
     public Set getMSessions() {
         return this.MSessions;
     }
@@ -135,10 +161,6 @@ public class User  implements java.io.Serializable {
     public void setMSessions(Set MSessions) {
         this.MSessions = MSessions;
     }
-
-
-
-
 }
 
 

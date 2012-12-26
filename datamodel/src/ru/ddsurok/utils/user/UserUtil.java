@@ -33,11 +33,15 @@ public class UserUtil implements IUserUtil, Serializable {
     }
 
     @Override
-    public void finalize() throws Throwable {
-        if (session != null && session.isOpen()) {
-            session.close();
+    public void finalize() throws Exception {
+        try {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+            super.finalize();
+        } catch (Throwable th) {
+            throw new Exception(th);
         }
-        super.finalize();
     }
 
     @Override

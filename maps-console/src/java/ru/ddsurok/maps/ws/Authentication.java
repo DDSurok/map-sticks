@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ru.ddsurok.maps.ws.authentication;
+package ru.ddsurok.maps.ws;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.Random;
 import javax.ejb.LocalBean;
@@ -14,9 +13,10 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.ws.soap.SOAPFaultException;
-import org.hibernate.HibernateException;
 import ru.ddsurok.datamodel.User;
+import ru.ddsurok.datamodel.Session;
 import ru.ddsurok.fault.FaultDetail;
+import ru.ddsurok.utils.session.SessionUtil;
 import ru.ddsurok.utils.user.UserUtil;
 
 /**
@@ -48,12 +48,31 @@ public class Authentication {
                     return l.toString();
                 }
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.err.println(ex);
             throw new Exception(new SOAPFaultException((new FaultDetail("MAPS-000001", "Произошла ошибка при обращении к базе данных. Обратитесь к администратору.", "")).getSOAPFault()));
-        } catch (HibernateException ex) {
+        }
+    }
+    
+    @WebMethod
+    public @WebResult(name = "isValidate")
+    boolean validateAuthToken(@WebParam(name = "AuthToken") int authToken) throws Exception {
+        SessionUtil sessionUtil;
+        try {
+            sessionUtil = new SessionUtil();
+        } catch (Exception ex) {
             System.err.println(ex);
             throw new Exception(new SOAPFaultException((new FaultDetail("MAPS-000001", "Произошла ошибка при обращении к базе данных. Обратитесь к администратору.", "")).getSOAPFault()));
+        }
+        try {
+            Session session = sessionUtil.getSessionByAuthToken(authToken);
+            if (session != null)
+                return true;
+            else
+                return false;
+        } catch (Exception ex) {
+            System.err.println(ex);
+            return false;
         }
     }
 }

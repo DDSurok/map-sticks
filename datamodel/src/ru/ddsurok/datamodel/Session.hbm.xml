@@ -7,7 +7,7 @@
       <column name="authtoken"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="ru.ddsurok.datamodel.User" fetch="select" name="MUser">
+    <many-to-one class="ru.ddsurok.datamodel.User" fetch="select" name="user">
       <column name="user" not-null="true" unique="true"/>
     </many-to-one>
     <property name="id" type="serializable">

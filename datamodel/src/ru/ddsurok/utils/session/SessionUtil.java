@@ -10,10 +10,9 @@ package ru.ddsurok.utils.session;
  */
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Restrictions;
 import ru.ddsurok.datamodel.Session;
 import ru.ddsurok.datamodel.User;
 import ru.ddsurok.utils.HibernateUtil;
@@ -32,15 +31,19 @@ public class SessionUtil implements ISessionUtil, Serializable {
     }
 
     @Override
-    public void finalize() throws Throwable {
-        if (session != null && session.isOpen()) {
-            session.close();
+    public void finalize() throws Exception {
+        try {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+            super.finalize();
+        } catch (Throwable th) {
+            throw new Exception(th);
         }
-        super.finalize();
     }
 
     @Override
-    public void addSession(Session ses) throws SQLException {
+    public void createSession(Session ses) throws SQLException {
         try {
             session.save(ses);
             session.getTransaction().commit();
@@ -79,23 +82,54 @@ public class SessionUtil implements ISessionUtil, Serializable {
     }
 
     @Override
-    public Collection getAllSessions() throws SQLException {
-        List sessions = new ArrayList<User>();
+    public Session getSessionByAuthToken(int authToken) throws SQLException {
+        Session ses = null;
         try {
-            sessions = session.createCriteria(User.class).list();
+            ses = (Session) session.createFilter(Session.class, "authtoken = " + authToken).list().get(0);
             session.getTransaction().commit();
             session.beginTransaction();
         } catch (Exception e) {
             session.getTransaction().rollback();
             session.beginTransaction();
         }
-        return sessions;
+        return ses;
     }
 
     @Override
-    public void deleteSession(Session ses) throws SQLException {
+    public Session getSessionByUser(User user) throws SQLException {
+        Session ses = null;
+        try {
+            ses = (Session) session.createCriteria(Session.class).add(Restrictions.eq("user", user)).list().get(0);
+            session.getTransaction().commit();
+            session.beginTransaction();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.beginTransaction();
+        }
+        return ses;
+    }
+
+    @Override
+    public void removeSession(Session ses) throws SQLException {
         try {
             session.delete(ses);
+            session.getTransaction().commit();
+            session.beginTransaction();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.beginTransaction();
+        }
+    }
+
+    @Override
+    public void removeSessionByAuthToken(int authToken) throws SQLException {
+        try {
+            Session ses = this.getSessionByAuthToken(authToken);
+            if (ses != null) {
+                session.delete(ses);
+            } else {
+                throw new Exception("Не найден экземпляр сессии который пытаемся удалить.");
+            }
             session.getTransaction().commit();
             session.beginTransaction();
         } catch (Exception e) {
