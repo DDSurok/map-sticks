@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints version="2.0" xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+  <endpoint implementation="ru.ddsurok.maps.ws.CompositeObjects" name="compositeObjects" url-pattern="/compositeObjects"/>
+  <endpoint implementation="ru.ddsurok.maps.ws.AlbumAccess" name="accessAlbum" url-pattern="/albums/access"/>
+  <endpoint implementation="ru.ddsurok.maps.ws.Authentication" name="authentication" url-pattern="/authentication"/>
+  <endpoint implementation="ru.ddsurok.maps.ws.Marks" name="marks" url-pattern="/marks"/>
+  <endpoint implementation="ru.ddsurok.maps.ws.Albums" name="changeAlbum" url-pattern="/albums/change"/>
+</endpoints>

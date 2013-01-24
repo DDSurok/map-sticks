@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Maps - WS" resourceRoot="" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="AlbumsSoapBinding" type="wsdl" bindingName="{http://maps.ddsurok.ru/ws/albums/change}AlbumsSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/maps-console/Albums/albumChange?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/maps-console/Albums/albumChange?wsdl"><con:part><con:url>http://localhost:8080/maps-console/Albums/albumChange?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="Albums" targetNamespace="http://maps.ddsurok.ru/ws/albums/change" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://maps.ddsurok.ru/ws/albums/change" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://maps.ddsurok.ru/ws/albums/change" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="changeColor" type="tns:changeColor"/>
+      <xs:element name="changeColorResponse" type="tns:changeColorResponse"/>
+      <xs:element name="createAlbum" type="tns:createAlbum"/>
+      <xs:element name="createAlbumResponse" type="tns:createAlbumResponse"/>
+      <xs:element name="getAlbumsByUser" type="tns:getAlbumsByUser"/>
+      <xs:element name="getAlbumsByUserResponse" type="tns:getAlbumsByUserResponse"/>
+      <xs:element name="removeAlbum" type="tns:removeAlbum"/>
+      <xs:element name="removeAlbumResponse" type="tns:removeAlbumResponse"/>
+      <xs:complexType name="createAlbum">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AuthToken" type="xs:long"/>
+          <xs:element minOccurs="0" name="AlbumName" type="xs:string"/>
+          <xs:element minOccurs="0" name="Color" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createAlbumResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="changeColor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AuthToken" type="xs:long"/>
+          <xs:element minOccurs="0" name="AlbumName" type="xs:string"/>
+          <xs:element minOccurs="0" name="NewColor" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeColorResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="removeAlbum">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AuthToken" type="xs:long"/>
+          <xs:element minOccurs="0" name="AlbumName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="removeAlbumResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getAlbumsByUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AuthToken" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAlbumsByUserResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:album"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="album">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="author" type="tns:user"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="compositeObjects" nillable="true" type="xs:anyType"/>
+          <xs:element minOccurs="0" name="defaultColor" type="xs:string"/>
+          <xs:element name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="points" nillable="true" type="xs:anyType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="user">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="albums" nillable="true" type="xs:anyType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="compositeObjects" nillable="true" type="xs:anyType"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="family" type="xs:string"/>
+          <xs:element minOccurs="0" name="hashpswd" type="xs:string"/>
+          <xs:element name="id" type="xs:int"/>
+          <xs:element name="isbaned" type="xs:boolean"/>
+          <xs:element name="islocked" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="nick" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="points" nillable="true" type="xs:anyType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="sessions" nillable="true" type="xs:anyType"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="removeAlbumResponse">
+    <wsdl:part element="tns:removeAlbumResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAlbumsByUser">
+    <wsdl:part element="tns:getAlbumsByUser" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAlbumsByUserResponse">
+    <wsdl:part element="tns:getAlbumsByUserResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeColor">
+    <wsdl:part element="tns:changeColor" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createAlbum">
+    <wsdl:part element="tns:createAlbum" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createAlbumResponse">
+    <wsdl:part element="tns:createAlbumResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="removeAlbum">
+    <wsdl:part element="tns:removeAlbum" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeColorResponse">
+    <wsdl:part element="tns:changeColorResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="albumChange">
+    <wsdl:operation name="createAlbum">
+      <wsdl:input message="tns:createAlbum" name="createAlbum"></wsdl:input>
+      <wsdl:output message="tns:createAlbumResponse" name="createAlbumResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeColor">
+      <wsdl:input message="tns:changeColor" name="changeColor"></wsdl:input>
+      <wsdl:output message="tns:changeColorResponse" name="changeColorResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeAlbum">
+      <wsdl:input message="tns:removeAlbum" name="removeAlbum"></wsdl:input>
+      <wsdl:output message="tns:removeAlbumResponse" name="removeAlbumResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAlbumsByUser">
+      <wsdl:input message="tns:getAlbumsByUser" name="getAlbumsByUser"></wsdl:input>
+      <wsdl:output message="tns:getAlbumsByUserResponse" name="getAlbumsByUserResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AlbumsSoapBinding" type="tns:albumChange">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createAlbum">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createAlbum">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createAlbumResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeColor">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changeColor">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeColorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeAlbum">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="removeAlbum">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeAlbumResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAlbumsByUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAlbumsByUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAlbumsByUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Albums">
+    <wsdl:port binding="tns:AlbumsSoapBinding" name="albumChangePort">
+      <soap:address location="http://localhost:8080/maps-console/Albums/albumChange"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/maps-console/Albums/albumChange</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="changeColor" bindingOperationName="changeColor" type="Request-Response" outputName="changeColorResponse" inputName="changeColor" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/maps-console/Albums/albumChange</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:chan="http://maps.ddsurok.ru/ws/albums/change">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <chan:changeColor>
+         <!--Optional:-->
+         <!--type: long-->
+         <AuthToken>10</AuthToken>
+         <!--Optional:-->
+         <!--type: string-->
+         <AlbumName>gero et</AlbumName>
+         <!--Optional:-->
+         <!--type: string-->
+         <NewColor>sonoras imperio</NewColor>
+      </chan:changeColor>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://maps.ddsurok.ru/ws/albums/change/albumChange/changeColor"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="createAlbum" bindingOperationName="createAlbum" type="Request-Response" outputName="createAlbumResponse" inputName="createAlbum" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/maps-console/Albums/albumChange</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:chan="http://maps.ddsurok.ru/ws/albums/change">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <chan:createAlbum>
+         <!--Optional:-->
+         <!--type: long-->
+         <AuthToken>10</AuthToken>
+         <!--Optional:-->
+         <!--type: string-->
+         <AlbumName>gero et</AlbumName>
+         <!--Optional:-->
+         <!--type: string-->
+         <Color>sonoras imperio</Color>
+      </chan:createAlbum>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://maps.ddsurok.ru/ws/albums/change/albumChange/createAlbum"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getAlbumsByUser" bindingOperationName="getAlbumsByUser" type="Request-Response" outputName="getAlbumsByUserResponse" inputName="getAlbumsByUser" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/maps-console/Albums/albumChange</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:chan="http://maps.ddsurok.ru/ws/albums/change">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <chan:getAlbumsByUser>
+         <!--Optional:-->
+         <!--type: long-->
+         <AuthToken>10</AuthToken>
+      </chan:getAlbumsByUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://maps.ddsurok.ru/ws/albums/change/albumChange/getAlbumsByUser"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="removeAlbum" bindingOperationName="removeAlbum" type="Request-Response" outputName="removeAlbumResponse" inputName="removeAlbum" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/maps-console/Albums/albumChange</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:chan="http://maps.ddsurok.ru/ws/albums/change">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <chan:removeAlbum>
+         <!--Optional:-->
+         <!--type: long-->
+         <AuthToken>10</AuthToken>
+         <!--Optional:-->
+         <!--type: string-->
+         <AlbumName>gero et</AlbumName>
+      </chan:removeAlbum>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://maps.ddsurok.ru/ws/albums/change/albumChange/removeAlbum"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="AuthenticationServiceSoapBinding" type="wsdl" bindingName="{http://maps.ddsurok.ru/ws/authentication}AuthenticationServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/maps-console/authentication?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/maps-console/authentication?wsdl"><con:part><con:url>http://localhost:8080/maps-console/authentication?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="AuthenticationService" targetNamespace="http://maps.ddsurok.ru/ws/authentication" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://maps.ddsurok.ru/ws/authentication" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://maps.ddsurok.ru/ws/authentication" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="destroyAuthToken" type="tns:destroyAuthToken"/>
+      <xs:element name="destroyAuthTokenResponse" type="tns:destroyAuthTokenResponse"/>
+      <xs:element name="getAuthToken" type="tns:getAuthToken"/>
+      <xs:element name="getAuthTokenResponse" type="tns:getAuthTokenResponse"/>
+      <xs:element name="validateAuthToken" type="tns:validateAuthToken"/>
+      <xs:element name="validateAuthTokenResponse" type="tns:validateAuthTokenResponse"/>
+      <xs:complexType name="getAuthToken">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Nick" type="xs:string"/>
+          <xs:element minOccurs="0" name="HashPassword" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAuthTokenResponse">
+        <xs:sequence>
+          <xs:element name="AuthToken" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="destroyAuthToken">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Nick" type="xs:string"/>
+          <xs:element minOccurs="0" name="AuthToken" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="destroyAuthTokenResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="validateAuthToken">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AuthToken" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="validateAuthTokenResponse">
+        <xs:sequence>
+          <xs:element name="IsValidate" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="SOAPException" type="tns:SOAPException"/>
+      <xs:complexType name="SOAPException">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAuthTokenResponse">
+    <wsdl:part element="tns:getAuthTokenResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validateAuthToken">
+    <wsdl:part element="tns:validateAuthToken" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validateAuthTokenResponse">
+    <wsdl:part element="tns:validateAuthTokenResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAuthToken">
+    <wsdl:part element="tns:getAuthToken" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="destroyAuthTokenResponse">
+    <wsdl:part element="tns:destroyAuthTokenResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="destroyAuthToken">
+    <wsdl:part element="tns:destroyAuthToken" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SOAPException">
+    <wsdl:part element="tns:SOAPException" name="SOAPException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="authentication">
+    <wsdl:operation name="getAuthToken">
+      <wsdl:input message="tns:getAuthToken" name="getAuthToken"></wsdl:input>
+      <wsdl:output message="tns:getAuthTokenResponse" name="getAuthTokenResponse"></wsdl:output>
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="destroyAuthToken">
+      <wsdl:input message="tns:destroyAuthToken" name="destroyAuthToken"></wsdl:input>
+      <wsdl:output message="tns:destroyAuthTokenResponse" name="destroyAuthTokenResponse"></wsdl:output>
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateAuthToken">
+      <wsdl:input message="tns:validateAuthToken" name="validateAuthToken"></wsdl:input>
+      <wsdl:output message="tns:validateAuthTokenResponse" name="validateAuthTokenResponse"></wsdl:output>
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthenticationServiceSoapBinding" type="tns:authentication">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAuthToken">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAuthToken">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAuthTokenResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="destroyAuthToken">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="destroyAuthToken">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="destroyAuthTokenResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateAuthToken">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="validateAuthToken">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validateAuthTokenResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuthenticationService">
+    <wsdl:port binding="tns:AuthenticationServiceSoapBinding" name="authenticationPort">
+      <soap:address location="http://localhost:8080/maps-console/authentication"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/maps-console/authentication</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="destroyAuthToken" bindingOperationName="destroyAuthToken" type="Request-Response" outputName="destroyAuthTokenResponse" inputName="destroyAuthToken" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/maps-console/authentication</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:aut="http://maps.ddsurok.ru/ws/authentication">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <aut:destroyAuthToken>
+         <!--Optional:-->
+         <!--type: string-->
+         <Nick>gero et</Nick>
+         <!--Optional:-->
+         <!--type: long-->
+         <AuthToken>10</AuthToken>
+      </aut:destroyAuthToken>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://maps.ddsurok.ru/ws/authentication/authentication/destroyAuthToken"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getAuthToken" bindingOperationName="getAuthToken" type="Request-Response" outputName="getAuthTokenResponse" inputName="getAuthToken" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/maps-console/authentication</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:aut="http://maps.ddsurok.ru/ws/authentication">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <aut:getAuthToken>
+         <!--Optional:-->
+         <!--type: string-->
+         <Nick>gero et</Nick>
+         <!--Optional:-->
+         <!--type: string-->
+         <HashPassword>sonoras imperio</HashPassword>
+      </aut:getAuthToken>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://maps.ddsurok.ru/ws/authentication/authentication/getAuthToken"/></con:call></con:operation><con:operation isOneWay="false" action="" name="validateAuthToken" bindingOperationName="validateAuthToken" type="Request-Response" outputName="validateAuthTokenResponse" inputName="validateAuthToken" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/maps-console/authentication</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:aut="http://maps.ddsurok.ru/ws/authentication">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <aut:validateAuthToken>
+         <!--Optional:-->
+         <!--type: long-->
+         <AuthToken>10</AuthToken>
+      </aut:validateAuthToken>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://maps.ddsurok.ru/ws/authentication/authentication/validateAuthToken"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

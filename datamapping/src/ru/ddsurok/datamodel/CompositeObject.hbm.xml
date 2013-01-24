@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19.12.2012 13:07:08 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="ru.ddsurok.datamodel.db.CompositeObject" schema="public" table="compositeobject">
+    <id name="Id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ru.ddsurok.datamodel.db.User" fetch="select" name="User">
+      <column name="author" not-null="true"/>
+    </many-to-one>
+    <property name="Caption" type="string">
+      <column name="caption"/>
+    </property>
+    <property name="Type" type="ru.ddsurok.datamodel.ws.CompositeObjectType">
+      <column name="type"/>
+    </property>
+    <property name="Color" type="string">
+      <column length="6" name="color"/>
+    </property>
+    <set inverse="true" name="GeometricPoints">
+      <key>
+        <column name="object"/>
+      </key>
+      <one-to-many class="ru.ddsurok.datamodel.db.GeometricPoint"/>
+    </set>
+  </class>
+</hibernate-mapping>

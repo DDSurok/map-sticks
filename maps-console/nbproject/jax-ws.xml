@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="Authentication">
+    <service name="compositeObjects">
+      <implementation-class>ru.ddsurok.maps.ws.CompositeObjects</implementation-class>
+    </service>
+    <service name="access">
+      <implementation-class>ru.ddsurok.maps.ws.AlbumAccess</implementation-class>
+    </service>
+    <service name="authentication">
       <implementation-class>ru.ddsurok.maps.ws.Authentication</implementation-class>
+    </service>
+    <service name="marks">
+      <implementation-class>ru.ddsurok.maps.ws.Marks</implementation-class>
+    </service>
+    <service name="change">
+      <implementation-class>ru.ddsurok.maps.ws.Albums</implementation-class>
     </service>
   </services>
   <clients/>
+  <jsr109>false</jsr109>
 </jax-ws>
