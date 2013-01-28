@@ -25,20 +25,20 @@ import ru.ddsurok.utils.SessionUtil;
 import ru.ddsurok.utils.fault.UserAlreadyLoginedException;
 import ru.ddsurok.utils.UserUtil;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
-/**
- *
- * @author d.duritskij
- */
 @WebService(name = "authentication", targetNamespace = "http://maps.ddsurok.ru/ws/authentication")
 public class Authentication {
+    
+    Logger log = Logger.getLogger(Authentication.class);
 
     @WebMethod
     public @WebResult(name = "AuthToken")
     long getAuthToken(@WebParam(name = "Nick") String nick, @WebParam(name = "HashPassword") String hashPswd) throws SOAPException {
         try {
+            if (log.isTraceEnabled()) {
+               log.trace("Get auth token run.");
+            }
             UserUtil userUtil = new UserUtil();
             User user = userUtil.getUserByNick(nick);
             validateUserInfo(user, hashPswd);
@@ -47,20 +47,26 @@ public class Authentication {
             if (session != null) {
                 try {
                     sessionUtil.validateSession(session);
+                    if (log.isTraceEnabled()) {
+                       log.trace("Get auth token finish.");
+                    }
                     return session.getAuthToken();
                 } catch (SessionClosedException ex) {
-                    System.out.println(ex);
+                    log.info(ex);
                 }
             }
             Random random = new Random(new Date().getTime());
             session = new Session(random.nextLong(), user, (short)60);
             sessionUtil.createSession(session);
+            if (log.isTraceEnabled()) {
+                log.trace("Get auth token finish.");
+            }
             return session.getAuthToken();
         } catch (HibernateException ex) {
-            System.err.println(ex);
+            log.error(ex);
             throw new MAPS000001();
         } catch (UserAlreadyLoginedException ex) {
-            System.err.println(ex);
+            log.info(ex);
             throw new MAPS010001();
         }
     }
@@ -69,27 +75,37 @@ public class Authentication {
     public @WebResult(name = "IsValidate")
     boolean validateAuthToken(@WebParam(name = "AuthToken") Long authToken) throws SOAPException {
         SessionUtil sessionUtil;
-        Logger log = LogManager.getLogger(Authentication.class);
-        log.info("SUCCESS");
+        if (log.isTraceEnabled()) {
+            log.trace("Validate auth token run.");
+        }
         try {
             sessionUtil = new SessionUtil();
             Session session = sessionUtil.getSessionByAuthToken(authToken);
             if (session != null) {
                 try {
                     sessionUtil.validateSession(session);
+                    if (log.isTraceEnabled()) {
+                       log.trace("Validate auth token finish.");
+                    }
                     return true;
                 } catch (SessionClosedException ex) {
-                    System.out.println(ex);
+                    log.info(ex);
+                    if (log.isTraceEnabled()) {
+                       log.trace("Validate auth token finish.");
+                    }
                     return false;
                 }
             } else {
+                if (log.isTraceEnabled()) {
+                    log.trace("Validate auth token finish.");
+                }
                 return false;
             }
         } catch (HibernateException ex) {
-            System.err.println(ex);
+            log.error(ex);
             throw new MAPS000001();
         } catch (Throwable ex) {
-            System.err.println(ex);
+            log.error(ex);
             throw new MAPS000001();
         }
         
@@ -98,17 +114,27 @@ public class Authentication {
     @WebMethod
     public void destroyAuthToken(@WebParam(name = "Nick") String nick, @WebParam(name = "AuthToken") Long authToken) throws SOAPException {
         try {
+            if (log.isTraceEnabled()) {
+                log.trace("Destroy auth token run.");
+            }
             SessionUtil sessionUtil = new SessionUtil();
             Session session = sessionUtil.getSessionByAuthToken(authToken);
             if (session == null) {
-                throw new MAPS010201();
+                MAPS010201 ex = new MAPS010201();
+                log.info(ex);
+                throw ex;
             }
             if (!session.getUser().getNick().equals(nick)) {
-                throw new MAPS010202();
+                MAPS010202 ex = new MAPS010202();
+                log.info(ex);
+                throw ex;
             }
             sessionUtil.removeSession(session);
+            if (log.isTraceEnabled()) {
+                log.trace("Destroy auth token finish.");
+            }
         } catch (HibernateException ex) {
-            System.err.println(ex);
+            log.error(ex);
             throw new MAPS000001();
         }
     }
@@ -116,12 +142,16 @@ public class Authentication {
     private void validateUserInfo(User user, String hashPswd) throws SOAPException {
         if (user == null) {
             // User not found
-            throw new MAPS010101();
+            MAPS010101 ex = new MAPS010101();
+            log.info(ex);
+            throw ex;
         }
         if (!user.getHashpswd().equals(hashPswd))
         {
             // Password don't correct
-            throw new MAPS010102();
+            MAPS010102 ex = new MAPS010102();
+            log.info(ex);
+            throw ex;
         }
     }
 }

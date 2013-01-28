@@ -55,4 +55,8 @@ public class AlbumUtil implements Serializable {
             throw e;
         }
     }
+
+    public Album getAlbumById(int Id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

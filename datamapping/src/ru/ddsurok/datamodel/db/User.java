@@ -8,6 +8,11 @@ import ru.ddsurok.utils.UserUtil;
  */
 public class User implements java.io.Serializable {
 
+    public static User create(String user) {
+        UserUtil util = new UserUtil();
+        return util.getUserByNick(user);
+    }
+
     private int id;
     private String nick;
     private String hashpswd;
@@ -48,11 +53,6 @@ public class User implements java.io.Serializable {
 //        this.CompositeObjects = MCompositeObjects;
 //        this.Points = MPoints;
 //        this.Sessions = MSessions;
-    }
-    
-    public User(String user) {
-        UserUtil util = new UserUtil();
-        util.getUserByNick(user);
     }
 
     @Override

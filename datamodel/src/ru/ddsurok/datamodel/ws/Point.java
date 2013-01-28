@@ -8,7 +8,7 @@ package ru.ddsurok.datamodel.ws;
  *
  * @author d.duritskij
  */
-public class Point extends XYPoint {
+public class Point extends XYPoint implements ICompositeObject {
     public String user;
     public String caption;
     public String color;

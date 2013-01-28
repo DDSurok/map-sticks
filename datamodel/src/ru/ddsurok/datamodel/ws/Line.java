@@ -8,7 +8,7 @@ package ru.ddsurok.datamodel.ws;
  *
  * @author d.duritskij
  */
-public class Line {
+public class Line implements java.io.Serializable, ICompositeObject {
     public XYPoint[] points;
     public String user;
     public String caption;

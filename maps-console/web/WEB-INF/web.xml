@@ -3,6 +3,9 @@
     <listener>
         <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>ru.ddsurok.utils.Log4jInit</listener-class> 
+    </listener>
     <servlet>
         <servlet-name>compositeObjects</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>

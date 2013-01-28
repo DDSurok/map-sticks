@@ -41,7 +41,7 @@ public class CompositeObject implements Serializable {
     public CompositeObject(Point point) {
         Caption = point.caption;
         Color = point.color;
-        User = new User(point.user);
+        User = ru.ddsurok.datamodel.db.User.create(point.user);
         Type = CompositeObjectType.POINT;
         GeometricPoints = new HashSet<GeometricPoint>();
         GeometricPoints.add(new GeometricPoint(point));
@@ -51,7 +51,7 @@ public class CompositeObject implements Serializable {
         Caption = line.caption;
         Color = line.color;
         Type = CompositeObjectType.LINE;
-        User = new User(line.user);
+        User = ru.ddsurok.datamodel.db.User.create(line.user);
         GeometricPoints = new HashSet<GeometricPoint>();
         for (XYPoint point : line.points) {
             GeometricPoints.add(new GeometricPoint(point));
