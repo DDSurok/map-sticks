@@ -1,20 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ru.ddsurok.utils;
 
-/**
- *
- * @author ddsurok
- */
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import org.hibernate.HibernateException;
-import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.ddsurok.datamodel.db.Session;
 import ru.ddsurok.datamodel.db.User;
 import ru.ddsurok.utils.fault.SessionClosedException;
@@ -23,6 +16,8 @@ import ru.ddsurok.utils.fault.UserAlreadyLoginedException;
 public class SessionUtil implements Serializable {
 
     private org.hibernate.Session session = null;
+    
+    private Logger log = LoggerFactory.getLogger(SessionUtil.class);
 
     public SessionUtil() throws HibernateException {
         try {
@@ -74,9 +69,10 @@ public class SessionUtil implements Serializable {
             ses = (Session)session.load(Session.class, id);
             session.getTransaction().commit();
             session.beginTransaction();
-        } finally {
+        } catch (HibernateException ex) {
             session.getTransaction().rollback();
             session.beginTransaction();
+            throw ex;
         }
         return ses;
     }
@@ -84,17 +80,19 @@ public class SessionUtil implements Serializable {
     public Session getSessionByAuthToken(long authToken) throws HibernateException {
         Session ses = null;
         try {
-            List list = session.createCriteria(Session.class).add(Expression.eq("AuthToken", authToken)).list();
+            List list = session.createCriteria(Session.class).add(Restrictions.eq("AuthToken", Long.valueOf(authToken))).list();
             if (list.size() > 0) {
                 ses = (Session) list.get(0);
             }
             session.getTransaction().commit();
             session.beginTransaction();
-        } finally {
+        } catch (HibernateException ex) {
             session.getTransaction().rollback();
             session.beginTransaction();
+            log.info(ex.getMessage(), ex.fillInStackTrace());
+        } finally {
+            return ses;
         }
-        return ses;
     }
 
     public Session getSessionByUser(User user) throws HibernateException {

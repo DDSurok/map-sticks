@@ -80,19 +80,19 @@ public class Album implements java.io.Serializable {
         this.DefaultColor = defaultColor;
     }
     
-    public Set getCompositeObjects() {
+    public Set<CompositeObject> getCompositeObjects() {
         return this.CompositeObjects;
     }
     
-    public void setCompositeObjects(Set obj) {
+    public void setCompositeObjects(Set<CompositeObject> obj) {
         this.CompositeObjects = obj;
     }
     
-    public Set getMarks() {
+    public Set<Mark> getMarks() {
         return this.Marks;
     }
     
-    public void setMarks(Set obj) {
+    public void setMarks(Set<Mark> obj) {
         this.Marks = obj;
     }
     
@@ -106,7 +106,7 @@ public class Album implements java.io.Serializable {
     public ru.ddsurok.datamodel.ws.Album toWsAlbum() throws ObjectCanNotConvertedException {
         ru.ddsurok.datamodel.ws.Album album = new ru.ddsurok.datamodel.ws.Album();
         album.Id = this.Id;
-        album.Author = this.Author.getName();
+        album.Author = this.Author.getNick();
         album.DefaultColor = this.DefaultColor;
         album.Name = this.Name;
         for (Mark mark : this.Marks) {

@@ -5,7 +5,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.apache.log4j.PropertyConfigurator;
 
-public class Log4jInit implements ServletContextListener {
+public class Initializer implements ServletContextListener {
        
     @Override
     public void contextInitialized(ServletContextEvent event) {

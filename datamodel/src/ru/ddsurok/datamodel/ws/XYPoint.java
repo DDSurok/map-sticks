@@ -11,8 +11,8 @@ import java.io.Serializable;
  * @author d.duritskij
  */
 public class XYPoint implements Serializable {
-    public float X;
-    public float Y;
+    protected float X;
+    protected float Y;
     
     public XYPoint() {
     }

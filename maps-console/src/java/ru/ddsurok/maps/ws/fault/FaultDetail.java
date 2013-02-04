@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ru.ddsurok.maps.ws.fault;
 
 import java.io.Serializable;
@@ -13,10 +9,6 @@ import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPFactory;
 import javax.xml.soap.SOAPFault;
 
-/**
- *
- * @author d.duritskij
- */
 @XmlRootElement(name = "FaultDetail", namespace="http://maps.ddsurok.ru/ws/fault")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FaultDetail", namespace = "http://maps.ddsurok.ru/ws/authentication", propOrder={"FaultCode", "FaultMessage", "Detail"})

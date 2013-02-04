@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 import ru.ddsurok.datamodel.db.User;
 
 public class UserUtil implements Serializable {
@@ -30,7 +30,8 @@ public class UserUtil implements Serializable {
         }
     }
 
-    public void finalize() throws Exception {
+    @Override
+    protected void finalize() throws Exception {
         try {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -82,7 +83,7 @@ public class UserUtil implements Serializable {
     public User getUserByNick(String nick) throws HibernateException {
         User user = null;
         try {
-            List users =  session.createCriteria(User.class).add(Expression.eq("nick", nick)).list();
+            List users =  session.createCriteria(User.class).add(Restrictions.eq("nick", nick)).list();
             if (users.size() > 0) {
                 user = (User) users.get(0);
             }

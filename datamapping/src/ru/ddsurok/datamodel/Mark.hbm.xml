@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 19.12.2012 13:07:08 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
   <class name="ru.ddsurok.datamodel.db.Mark" schema="public" table="point">
-    <id name="Id" type="int">
+    <id name="Id">
       <column name="id"/>
-      <generator class="assigned"/>
+      <generator class="identity"/>
     </id>
     <many-to-one class="ru.ddsurok.datamodel.db.User" fetch="select" name="Author">
       <column name="author" not-null="true"/>
@@ -22,5 +21,8 @@
     <property name="Color" type="string">
       <column length="6" name="color"/>
     </property>
+    <many-to-one class="ru.ddsurok.datamodel.db.Album" fetch="select" name="album">
+      <column name="album" not-null="true"/>
+    </many-to-one>
   </class>
 </hibernate-mapping>

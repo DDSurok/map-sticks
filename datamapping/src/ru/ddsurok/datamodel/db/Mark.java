@@ -6,6 +6,7 @@ public class Mark extends XYPoint implements java.io.Serializable {
 
     private Integer Id = null;
     private User Author = null;
+    private Album album = null;
     private String Caption;
     private String Color;
 
@@ -21,31 +22,11 @@ public class Mark extends XYPoint implements java.io.Serializable {
         this.Color = mark.Color;
     }
 
-    public Mark(int id, User MUser, float x, float y) {
-        this.Id = id;
-        this.Author = MUser;
-        this.X = x;
-        this.Y = y;
-        this.X = 0;
-        this.Y = 0;
-    }
-
-    public Mark(int id, User MUser, Album MAlbum, float x, float y, String caption, String color) {
-        this.Id = id;
-        this.Author = MUser;
-        this.X = x;
-        this.Y = y;
-        this.Caption = caption;
-        this.Color = color;
-        this.X = 0;
-        this.Y = 0;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return this.Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.Id = id;
     }
 
@@ -55,6 +36,14 @@ public class Mark extends XYPoint implements java.io.Serializable {
 
     public void setAuthor(User MAuthor) {
         this.Author = MAuthor;
+    }
+    
+    public Album getAlbum() {
+        return album;
+    }
+    
+    public void setAlbum(Album value) {
+        this.album = value;
     }
 
     public String getCaption() {
@@ -74,7 +63,7 @@ public class Mark extends XYPoint implements java.io.Serializable {
     }
     
     public ru.ddsurok.datamodel.ws.Mark toWsMark() {
-        ru.ddsurok.datamodel.ws.Mark mark = new ru.ddsurok.datamodel.ws.Mark();
+        ru.ddsurok.datamodel.ws.Mark mark = new ru.ddsurok.datamodel.ws.Mark(this);
         mark.Author = this.Author.getNick();
         mark.Caption = this.Caption;
         mark.Color = this.Color;

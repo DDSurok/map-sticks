@@ -1,30 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ru.ddsurok.utils;
 
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
-/**
- * Hibernate Utility class with a convenient method to get Session Factory
- * object.
- *
- * @author ddsurok
- */
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
     
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(HibernateUtil.class);
+    
     static {
         try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+            Configuration config = new Configuration();
+            config.configure();
+            ServiceRegistryBuilder srBuilder = new ServiceRegistryBuilder();
+            srBuilder.applySettings(config.getProperties());
+            ServiceRegistry serviceRegistry = srBuilder.buildServiceRegistry();
+            sessionFactory = config.buildSessionFactory(serviceRegistry);
         } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
+            log.error("Initial SessionFactory creation failed.", ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

@@ -8,4 +8,8 @@ public class Mark extends XYPoint implements java.io.Serializable {
     public Mark() {
         super();
     }
+    
+    public Mark (XYPoint p) {
+        super(p);
+    }
 }

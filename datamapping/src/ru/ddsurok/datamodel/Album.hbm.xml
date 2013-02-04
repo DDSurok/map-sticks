@@ -16,13 +16,13 @@
     <property name="DefaultColor" type="string">
       <column length="6" name="defaultcolor" not-null="true"/>
     </property>
-    <set inverse="true" name="CompositeObjects">
+    <set inverse="true" name="CompositeObjects" cascade="all-delete-orphan">
       <key>
         <column name="album"/>
       </key>
       <one-to-many class="ru.ddsurok.datamodel.db.CompositeObject"/>
     </set>
-    <set inverse="true" name="Marks">
+    <set inverse="true" name="Marks" cascade="all-delete-orphan">
       <key>
         <column name="album"/>
       </key>

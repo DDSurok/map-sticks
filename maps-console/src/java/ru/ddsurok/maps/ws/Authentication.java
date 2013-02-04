@@ -15,7 +15,7 @@ import org.hibernate.HibernateException;
 import ru.ddsurok.datamodel.db.User;
 import ru.ddsurok.datamodel.db.Session;
 import ru.ddsurok.maps.ws.fault.MAPS000001;
-import ru.ddsurok.maps.ws.fault.MAPS010001;
+import ru.ddsurok.maps.ws.fault.MAPS000002;
 import ru.ddsurok.maps.ws.fault.MAPS010101;
 import ru.ddsurok.maps.ws.fault.MAPS010102;
 import ru.ddsurok.maps.ws.fault.MAPS010201;
@@ -26,6 +26,7 @@ import ru.ddsurok.utils.fault.UserAlreadyLoginedException;
 import ru.ddsurok.utils.UserUtil;
 
 import org.apache.log4j.Logger;
+import ru.ddsurok.maps.ws.fault.MAPS010203;
 
 @WebService(name = "authentication", targetNamespace = "http://maps.ddsurok.ru/ws/authentication")
 public class Authentication {
@@ -67,48 +68,20 @@ public class Authentication {
             throw new MAPS000001();
         } catch (UserAlreadyLoginedException ex) {
             log.info(ex);
-            throw new MAPS010001();
+            throw new MAPS000002();
         }
     }
     
-    @WebMethod
+    @WebMethod(operationName = "validateAuthToken")
     public @WebResult(name = "IsValidate")
-    boolean validateAuthToken(@WebParam(name = "AuthToken") Long authToken) throws SOAPException {
-        SessionUtil sessionUtil;
-        if (log.isTraceEnabled()) {
-            log.trace("Validate auth token run.");
-        }
+    boolean silentValidateAuthToken(@WebParam(name = "AuthToken") Long authToken) {
         try {
-            sessionUtil = new SessionUtil();
-            Session session = sessionUtil.getSessionByAuthToken(authToken);
-            if (session != null) {
-                try {
-                    sessionUtil.validateSession(session);
-                    if (log.isTraceEnabled()) {
-                       log.trace("Validate auth token finish.");
-                    }
-                    return true;
-                } catch (SessionClosedException ex) {
-                    log.info(ex);
-                    if (log.isTraceEnabled()) {
-                       log.trace("Validate auth token finish.");
-                    }
-                    return false;
-                }
-            } else {
-                if (log.isTraceEnabled()) {
-                    log.trace("Validate auth token finish.");
-                }
-                return false;
-            }
-        } catch (HibernateException ex) {
-            log.error(ex);
-            throw new MAPS000001();
-        } catch (Throwable ex) {
-            log.error(ex);
-            throw new MAPS000001();
+            validateAuthTokenWithInfo(authToken);
+            return true;
+        } catch (Throwable th) {
+            log.info(th);
+            return false;
         }
-        
     }
     
     @WebMethod
@@ -152,6 +125,36 @@ public class Authentication {
             MAPS010102 ex = new MAPS010102();
             log.info(ex);
             throw ex;
+        }
+    }
+
+    public void validateAuthTokenWithInfo(Long authToken) throws SOAPException {
+        SessionUtil sessionUtil;
+        if (log.isTraceEnabled()) {
+            log.trace("Validate auth token run.");
+        }
+        try {
+            sessionUtil = new SessionUtil();
+        } catch (HibernateException ex) {
+            log.error(ex);
+            throw new MAPS000001();
+        }
+        Session session = sessionUtil.getSessionByAuthToken(authToken);
+        if (session != null) {
+            try {
+                sessionUtil.validateSession(session);
+            } catch (SessionClosedException ex) {
+                log.info(ex);
+                throw new MAPS010203();
+            }
+            if (log.isTraceEnabled()) {
+               log.trace("Validate auth token finish.");
+            }
+        } else {
+            if (log.isTraceEnabled()) {
+                log.trace("Validate auth token finish.");
+            }
+            throw new MAPS010201();
         }
     }
 }
