@@ -1,0 +1,1 @@
+Service for sticking and drawing over maps
